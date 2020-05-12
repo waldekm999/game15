@@ -3,6 +3,10 @@ let $numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,""]
 let $startNumbers = [];
 let $allButtons = Array.from(document.querySelectorAll('.btn'));
 let nullBtn ;
+let $countView = document.querySelector('.count-view');
+let $result = 0;
+let $gameOver = document.querySelector('.game-over');
+
 
 
 
@@ -49,7 +53,7 @@ const setEnabled = () => {
     }    
 }
 
-// sprawdzeie czy zadanie rozwiązane
+// sprawdzenie czy zadanie rozwiązane
 
 const isOk = () => {
     let bolsik = 1;
@@ -63,7 +67,9 @@ const isOk = () => {
     return bolsik;
 }
 
+/*
 const setBoardReady = () => {
+    $result += 1;
     $allButtons.filter(btn => btn.classList.contains('enabled')).map(btn => {
         btn.addEventListener('click', function(e) {
             let $temp;
@@ -71,19 +77,62 @@ const setBoardReady = () => {
             $nullBtn.textContent = $temp;
             $nullBtn.classList.remove('null');
             e.target.textContent = "";
-            e.target.classList.add('null'); 
+            e.target.classList.add('null');            
+            $countView.textContent = $result;          
             setNull();  
-            setEnabled();   
+            setEnabled();  
+            if(!isOk()){ 
             setBoardReady();           
-        })       
+            } else {
+                $gameOver.classList.remove('hidden');
+            }
+        })  
+            
     });    
 }
+*/
+
+const setListener = () => {
+    $allButtons.filter(btn => btn.classList.contains('enabled')).map(btn => {
+        btn.addEventListener('click', handleClick)
+    });
+}
+
+const handleClick = (e) => {
+    console.log(e.target.textContent);
+        $result += 1;
+        $countView.textContent = $result;
+        let $temp;
+            $temp = e.target.textContent;
+            $nullBtn.textContent = $temp;
+            $nullBtn.classList.remove('null');
+            e.target.textContent = "";
+            e.target.classList.add('null'); 
+            setNull();  
+            setEnabled();
+            if(!isOk){
+            setListener();
+            } else {
+                $gameOver.classList.remove('hidden');
+            }
+}
+
+
+
+
+
+
 
 //-------------------------executing ------------------------------------------------ 
 setNull();
 fillBoard();
 setEnabled();
-setBoardReady();
+setListener();
+
+
+
+//setBoardReady();
+
 
 
 

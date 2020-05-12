@@ -5,6 +5,7 @@
 
 .wrapper {
     display: flex;   
+    flex-direction: column;
     min-height: 100vh;
     justify-content: center; 
     align-items: center;
@@ -45,4 +46,16 @@
 
 .null{
     background-color: azure;
+}
+
+.result {
+    font-size: 3vmin;
+    margin-top: 0;
+}
+.game-over{
+    color: red;   
+}
+
+.hidden {
+    visibility: hidden;
 }
