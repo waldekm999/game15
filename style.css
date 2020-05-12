@@ -1,0 +1,48 @@
+* {
+    font-size: 6vmin;
+    color: #333333;
+}
+
+.wrapper {
+    display: flex;   
+    min-height: 100vh;
+    justify-content: center; 
+    align-items: center;
+    background-color: azure;    
+}
+
+.container{
+   display: flex;
+   flex-direction: column; 
+   border-radius: 2%;
+   border: 2px solid #666666; 
+   box-shadow: 4px 4px 2px 4px #888888;  
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.btn{
+    background-color: aqua;
+    width: 18vmin;
+    height: 18vmin; 
+    border-radius: 8%;      
+    
+}
+
+.enabled:hover{
+    opacity: 0.6;
+    color: black;
+    
+}
+
+.enabled:active{
+    box-shadow: 10px 10px 8px 10px #888888;
+}
+
+.null{
+    background-color: azure;
+}
