@@ -1,13 +1,11 @@
 const $properNumbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,""];
-let $numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,""]
+let $numbers = [];
 let $startNumbers = [];
 let $allButtons = Array.from(document.querySelectorAll('.btn'));
 let nullBtn ;
 let $countView = document.querySelector('.count-view');
 let $result = 0;
 let $gameOver = document.querySelector('.game-over');
-
-
 
 
 const setNull = () => {
@@ -25,7 +23,7 @@ const fillBoard = () => {
 }
 
 const randomNumbers = () => {
-    let $temporaryNumbers = $properNumbers;  
+    let $temporaryNumbers =  [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,""];    
     let $lopCount = $temporaryNumbers.length - 1;
        
     while($lopCount > 0) {
@@ -57,49 +55,27 @@ const setEnabled = () => {
 
 const isOk = () => {
     let bolsik = 1;
-    for(let i = 0; i < $properNumbers.length; i++){
-        if($properNumbers[i] != $numbers[i]){
-            bolsik = 0;
+    for(let i = 0; i < $properNumbers.length; i++){        
+        if($properNumbers[i] != $numbers[i]){          
+            bolsik = 0;           
             return bolsik;            
-        }
-        console.log(i);
-    }
+        }       
+    }      
     return bolsik;
 }
 
-/*
-const setBoardReady = () => {
-    $result += 1;
-    $allButtons.filter(btn => btn.classList.contains('enabled')).map(btn => {
-        btn.addEventListener('click', function(e) {
-            let $temp;
-            $temp = e.target.textContent;
-            $nullBtn.textContent = $temp;
-            $nullBtn.classList.remove('null');
-            e.target.textContent = "";
-            e.target.classList.add('null');            
-            $countView.textContent = $result;          
-            setNull();  
-            setEnabled();  
-            if(!isOk()){ 
-            setBoardReady();           
-            } else {
-                $gameOver.classList.remove('hidden');
-            }
-        })  
-            
-    });    
-}
-*/
-
 const setListener = () => {
-    $allButtons.filter(btn => btn.classList.contains('enabled')).map(btn => {
-        btn.addEventListener('click', handleClick)
+    $allButtons.map(btn => {
+        btn.addEventListener('click', handleClick)        
     });
 }
 
-const handleClick = (e) => {
-    console.log(e.target.textContent);
+const setNumbers = () => {
+    $numbers = $allButtons.map((number) => number.textContent);    
+}
+
+const handleClick = (e) => {    
+    if(e.target.classList.contains('enabled')){
         $result += 1;
         $countView.textContent = $result;
         let $temp;
@@ -110,11 +86,14 @@ const handleClick = (e) => {
             e.target.classList.add('null'); 
             setNull();  
             setEnabled();
-            if(!isOk){
-            setListener();
-            } else {
-                $gameOver.classList.remove('hidden');
-            }
+            setNumbers();     
+           if(!isOk()){
+            //jeżeli not - it won't itterate through all items              
+        } else {
+            $gameOver.classList.remove('hidden');
+        }       
+        }
+        
 }
 
 
@@ -131,7 +110,11 @@ setListener();
 
 
 
-//setBoardReady();
+
+
+
+
+
 
 
 
